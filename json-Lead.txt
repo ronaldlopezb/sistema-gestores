@@ -1,0 +1,121 @@
+[
+  {
+    "Lead": {
+      "Registro": {
+        "IDIC": 19,
+        "RegistroID": "MN-2026-1026",
+        "Fecha": "14/02/2026",
+        "Hora": "12:56 PM",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Buen Prospecto"
+      },
+      "Prospecto": {
+        "EsProspecto": false,
+        "InfoProspecto": null
+      },
+      "Info": {
+        "Nombre": "Ronald Lopez Bahamonde",
+        "Correo": "ronaldlopez@ronaldlopezb.com",
+        "Pais": "Perú",
+        "WhatsApp": "+51991435745",
+        "Linkedin": "ronaldlopezb",
+        "WhatsAppOriginal": "991435745"
+      },
+      "Trader": {
+        "Broker": "eToro",
+        "TiempoTrader": "1 – 3 años",
+        "TiempoGestor": "Menos de 1 año",
+        "Actividad": "Gestión de cuentas",
+        "Programa": "PAMM – Gestión porcentual",
+        "AlcanceClientes": "21–50 clientes",
+        "Colaboraciones": "Sí",
+        "Objetivo": "Mejorar mis comisiones"
+      },
+      "Redes": {
+        "Ig": {
+          "Active": "on",
+          "Usuario": "ronaldlopezb1",
+          "Seguidores": "1,000"
+        },
+        "Youtube": {
+          "Active": "on",
+          "Usuario": "ronaldlopezb2",
+          "Seguidores": "2,000"
+        },
+        "Telegram": {
+          "Active": "on",
+          "Usuario": "ronaldlopezb3",
+          "Seguidores": "3,000"
+        },
+        "Tiktok": {
+          "Active": "on",
+          "Usuario": "ronaldlopezb4",
+          "Seguidores": "4,000"
+        },
+        "Discord": {
+          "Active": "on",
+          "Usuario": "ronaldlopezb5",
+          "Seguidores": "5,000"
+        },
+        "Web": "https://ronaldlopezb.com"
+      }
+    }
+  },
+  {
+    "Seguimiento": null
+  },
+  {
+    "IC": {
+      "ScoreComercial": {
+        "Valor": 65,
+        "Texto": "Lead con buen nivel de madurez comercial, con indicadores sólidos en experiencia, volumen y rentabilidad.",
+        "Clasificacion": "Buen Prospecto",
+        "Potencial": "Medio - Alto",
+        "Etiqueta": "Seguimiento activo"
+      },
+      "PerfilComercial": [
+        "Experiencia intermedia en trading",
+        "Gestión en etapa temprana",
+        "Cartera de clientes en crecimiento",
+        "Volumen operativo limitado",
+        "Rentabilidad anual baja",
+        "Presencia digital diversificada",
+        "Cuenta con acompañamiento operativo",
+        "Perfil con proyección de crecimiento"
+      ],
+      "Trayectoria": {
+        "AniosTrader": "1 – 3 años",
+        "AniosGestor": "Menos de 1 año",
+        "Especializacion": "Gestión de cuentas",
+        "Formato": "PAMM – Gestión porcentual"
+      },
+      "DolorNecesidad": [
+        "Bajo volumen operativo mensual, limitando su capacidad de generación de ingresos.",
+        "Rentabilidad anual por debajo del promedio del mercado.",
+        "Escaso apoyo en marketing y captación de nuevos clientes.",
+        "Soporte operativo limitado para procesos de escalamiento.",
+        "Experiencia limitada en gestión profesional de capital."
+      ],
+      "ArgumentoVenta": "Actualmente, su modelo de operación presenta un nivel de madurez buen prospecto, con una base sólida para evolucionar hacia un esquema más rentable y escalable. Se identifican oportunidades claras de mejora, principalmente en bajo volumen operativo mensual, limitando su capacidad de generación de ingresos. A través del ecosistema institucional de DuoMarkets, es posible optimizar sus condiciones operativas, fortalecer su posicionamiento comercial y ampliar su capacidad de captación de capital. Este enfoque integral le permitirá acelerar su crecimiento, consolidar su cartera de inversionistas y posicionarse como un gestor institucional de referencia.",
+      "ProductosServicios": [
+        "Programa de escalamiento progresivo de capital",
+        "Optimización institucional de rebates y comisiones",
+        "Plan integral de optimización operativa y comercial"
+      ],
+      "Metricas": {
+        "Clientes": "21–50 clientes",
+        "Volumen": "50–200 lotes",
+        "Rentabilidad": "10% – 20%",
+        "CapitalPromedio": "$2 000–$10 000 dólares"
+      },
+      "ProximosPasos": [
+        "Establecer contacto inicial consultivo para profundizar en sus objetivos y necesidades.",
+        "Presentar propuesta institucional adaptada a su perfil operativo y proyección de crecimiento.",
+        "Diseñar plan de optimización enfocado en sus principales áreas de mejora detectadas.",
+        "Activar programa de acompañamiento con los servicios priorizados.",
+        "Definir calendario de seguimiento mensual para acelerar su proceso de escalamiento.",
+        "Avanzar hacia formalización de alianza estratégica con DuoMarkets."
+      ]
+    }
+  }
+]

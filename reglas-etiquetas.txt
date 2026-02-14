@@ -1,0 +1,5 @@
+Clasificacion        Etiqueta               Potencial          Color
+"Alta Promesa"       "Cerrar rápido"       "Alto"              "Verde"
+"Buen Prospecto"     "Seguimiento activo"  "Medio - Alto"      "Amarillo"
+"En Desarrollo"      "Nutrir relación"     "Medio"             "Naranja"
+"Bajo Potencial"     "Observación"         "Bajo"              "Rojo"
