@@ -33,6 +33,12 @@ $isActive = function ($path) use ($relativePath) {
 				</a>
 			</li>
 
+			<li class="sidebar-item d-none<?php echo $isActive("pages/funnels/funnel.php"); ?>" id="sidebar-embudos">
+				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/funnels/funnel.php">
+					<i class="align-middle" data-feather="filter"></i> <span class="align-middle">Funnels</span>
+				</a>
+			</li>
+
 			<li class="sidebar-header">
 				Estado
 			</li>
@@ -89,19 +95,37 @@ $isActive = function ($path) use ($relativePath) {
 				</a>
 			</li>
 
-			<li class="sidebar-header">
-				Sistema
+			<li class="sidebar-header" style="background: rgba(255, 255, 255, 0.06); border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin: 10px 12px; padding: 8px 12px;">
+				Evaluaciones Rápidas
 			</li>
 
-			<li class="sidebar-item<?php echo $isActive("pages/sistema/evaluaciones-rapidas.php"); ?>">
-				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/sistema/evaluaciones-rapidas.php">
-					<i class="align-middle" data-feather="zap"></i> <span class="align-middle">Evaluaciones Rapidas</span>
+			<li class="sidebar-item<?php echo $isActive("pages/eva-rapida/recien-llegados.php"); ?>">
+				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/eva-rapida/recien-llegados.php">
+					<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Recien llegados</span>
 				</a>
 			</li>
 
-			<li class="sidebar-item<?php echo $isActive("pages/sistema/evaluaciones-profundas.php"); ?>">
-				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/sistema/evaluaciones-profundas.php">
-					<i class="align-middle" data-feather="layers"></i> <span class="align-middle">Evaluaciones Profundas</span>
+			<li class="sidebar-item<?php echo $isActive("pages/eva-rapida/trabajando.php"); ?>">
+				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/eva-rapida/trabajando.php">
+					<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Trabajando</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item<?php echo $isActive("pages/eva-rapida/vendidos.php"); ?>">
+				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/eva-rapida/vendidos.php">
+					<i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Vendidos</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item<?php echo $isActive("pages/eva-rapida/anulados.php"); ?>">
+				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/eva-rapida/anulados.php">
+					<i class="align-middle" data-feather="x-circle"></i> <span class="align-middle">Anulados</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item<?php echo $isActive("pages/eva-rapida/con-evaluacion-profesional.php"); ?>">
+				<a class="sidebar-link" href="<?php echo $baseUrl; ?>/pages/eva-rapida/con-evaluacion-profesional.php">
+					<i class="align-middle" data-feather="layers"></i> <span class="align-middle">Con Evaluación Profesional</span>
 				</a>
 			</li>
 		</ul>

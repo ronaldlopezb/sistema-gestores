@@ -78,28 +78,35 @@
 							</div>
 
 							<div class="card shadow-sm mt-4">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Preferencias</h5>
-								</div>
+						<div class="card-header">
+							<h5 class="card-title mb-0">Preferencia de Dashboard y Listados</h5>
+						</div>
 								<div class="card-body">
-									<div class="row g-3">
-										<div class="col-12 col-md-6">
-											<label class="form-label" for="perfil-cantidad-listados">CantidadListados</label>
-											<input type="number" class="form-control" id="perfil-cantidad-listados" min="0" step="1" placeholder="0" />
-										</div>
-										<div class="col-12 col-md-6">
-											<label class="form-label" for="perfil-filtro-predeterminado">Periodo predeterminado en dashboard</label>
-											<select class="form-select" id="perfil-filtro-predeterminado">
-												<option value="hoy">Hoy</option>
-												<option value="semana">Esta Semana</option>
-												<option value="15-dias">Ultimos 15 días</option>
-												<option value="mes">Este Mes</option>
-												<option value="3-meses">Ultimos 3 meses</option>
-												<option value="6-meses">Ultimos 6 meses</option>
-												<option value="1-ano">Ultimo año</option>
-												<option value="todo">Todo</option>
-											</select>
-										</div>
+								<div class="row g-3">
+									<div class="col-12 col-lg-4">
+										<label class="form-label" for="perfil-filtro-predeterminado">Periodo predeterminado en dashboard</label>
+										<select class="form-select" id="perfil-filtro-predeterminado">
+											<option value="hoy">Hoy</option>
+										<option value="semana">Esta semana</option>
+										<option value="15-dias">Últimos 15 días</option>
+										<option value="mes">Este mes</option>
+										<option value="3-meses">Últimos 3 meses</option>
+										<option value="6-meses">Últimos 6 meses</option>
+										<option value="1-ano">Año actual</option>
+											<option value="todo">Todo</option>
+										</select>
+									</div>
+									<div class="col-12 col-lg-4">
+										<label class="form-label" for="perfil-filtro-automatico">Filtro automático</label>
+										<select class="form-select" id="perfil-filtro-automatico">
+											<option value="true">Activado</option>
+											<option value="false">Desactivado</option>
+										</select>
+									</div>
+									<div class="col-12 col-lg-4">
+										<label class="form-label" for="perfil-cantidad-listados">Cantidad de registros en listas</label>
+										<input type="number" class="form-control" id="perfil-cantidad-listados" min="0" step="1" placeholder="0" />
+									</div>
 									</div>
 									<div class="d-flex justify-content-end mt-3">
 										<button type="button" class="btn btn-primary" id="perfil-guardar-preferencias">

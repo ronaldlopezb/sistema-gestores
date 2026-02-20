@@ -1,0 +1,54 @@
+Modelo recomendado (relacional)                                                                                                     eva-rap.png                             
+     1) funnels                                                                                                                          includes/sidebar.php           +26 -8   
+     - id, nombre, descripcion, activo, created_at                                                                                       js/eva-rapida.js                 +42626 
+                                                                                                                                         js/evaluaciones-rapidas.js       +286   
+     2) funnel_stages                                                                                                                    json-eva-rapida.txt               +94   
+     - id, funnel_id (FK), nombre, orden, activo, created_at                                                                             pages/eva-rapida/anulados.php     +81   
+     - Cada embudo tiene sus propias etapas.                                                                                             pages/eva-rapida/con-evaluacion-p +81   
+                                                                                                                                         pages/eva-rapida/eva-rapida.php  +664   
+     3) lead_funnel (asignación del lead al embudo)                                                                                      pages/eva-rapida/recien-llegados. +81   
+     - id, lead_id (FK), funnel_id (FK), created_at, updated_at, status (opcional)                                                       pages/eva-rapida/trabajando.php   +81   
+     - Esto permite un lead en varios embudos.                                                                                           pages/eva-rapida/vendidos.php     +81   
+                                                                                                                                         pages/sistema/evaluaciones-profun -41   
+     4) lead_funnel_stage (etapa actual y/o historial)                                                                                   pages/sistema/evaluaciones-rapida -41   
+     - Opción A (solo etapa actual):                                                                                                     pages/user/perfil.php           +2 -2   
+       - lead_funnel_id (FK), stage_id (FK), updated_at                                                                                  tabla.txt                         +93   
+     - Opción B (con historial):                                                                                                                                                 
+       - id, lead_funnel_id (FK), stage_id (FK), entered_at, exited_at, user_id (opcional)                                                                                       
+                                                                                                                                                                                 
+     Cómo asignar un lead a un embudo                                                                                                                                            
+     1) Insertar en lead_funnel (lead ↔ embudo).                                                                                                                                 
+     2) Asignar etapa inicial en lead_funnel_stage (la primera etapa del embudo).                                                                                                
+                                                                                                                                                                                 
+     Cómo mover etapas                                                                                                                                                           
+     - Actualizas la fila actual (o cierras exited_at y creas nueva con entered_at) en lead_funnel_stage.                                                                        
+                                                                                                                                                                                 
+     Por qué esto funciona                                                                                                                                                       
+     - Un lead puede estar en muchos embudos (tabla lead_funnel).                                                                                                                
+     - En cada embudo, puede estar en una etapa específica, con historial si quieres.                                                                                            
+                                                                                                                                                                                 
+     Si quieres, dime:                                                                                                                                                           
+     - ¿Usas MySQL o PostgreSQL?                                                                                                                                                 
+     - ¿Quieres historial de cambios o solo la etapa actual? 
+
+      
+
+      IMPORTANTE: PARA EDITAR FUNNEL.. 
+      AqUE EL SISTEMA IDENTIFIQUE QUE CAMBIOS HAN HABIA Y QUE ENVIE ORDENADO ES DECIR.. 
+      RAMA DE COSAS NUEVAS Y RAMA DE COSAS PARA EDITAR..
+
+      EJEMPLO
+
+      EDITAR 
+       - Funnel: (Campos que se editaran -> ID, Nombre, Descripcion, Activo)
+       - Etapas
+          - Etapa 01: (ID, Nombre, Orden)
+          - Etapa 03: (ID, Nombre, Orden)
+      CREAR
+       - Etapa 05: (Nombre, Orden)
+      BORRAR
+       - Etapa 02: (ID)
+    
+
+    armar bien el json que me enviará al presinoar el boton para poder yo en n8n 
+    hacer todo el proceso de edicion, eliminar y crear

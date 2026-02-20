@@ -1,31 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const tableCard = document.getElementById("recien-llegados-table");
-	const tableBody = document.getElementById("recien-llegados-body");
-	const emptyState = document.getElementById("recien-llegados-empty");
-	const pagination = document.getElementById("recien-llegados-pagination");
-	const totalLabel = document.getElementById("recien-llegados-total");
-	const rangeLabel = document.getElementById("recien-llegados-range");
-	const prevButton = document.getElementById("recien-llegados-prev");
-	const nextButton = document.getElementById("recien-llegados-next");
+	const tableCard = document.getElementById("evaluaciones-rapidas-table");
+	const tableBody = document.getElementById("evaluaciones-rapidas-body");
+	const emptyState = document.getElementById("evaluaciones-rapidas-empty");
+	const pagination = document.getElementById("evaluaciones-rapidas-pagination");
+	const totalLabel = document.getElementById("evaluaciones-rapidas-total");
+	const rangeLabel = document.getElementById("evaluaciones-rapidas-range");
+	const prevButton = document.getElementById("evaluaciones-rapidas-prev");
+	const nextButton = document.getElementById("evaluaciones-rapidas-next");
 	const baseUrl = window.appBaseUrl || "";
 	const token = localStorage.getItem("auth_token") || "";
+	const estadoValue = tableCard ? tableCard.dataset.estado : "";
 	let pageSize = 20;
 	let currentPage = 1;
 	let cachedRows = [];
-
-	const classificationColors = {
-		"Bajo Potencial": "#1B6CA8",
-		"En Desarrollo": "#4FB3E6",
-		"Buen Prospecto": "#2EAE6E",
-		"Alta Promesa": "#E67BB0"
-	};
-
-	const classificationIcons = {
-		"Bajo Potencial": "trending-down",
-		"En Desarrollo": "trending-up",
-		"Buen Prospecto": "thumbs-up",
-		"Alta Promesa": "star"
-	};
 
 	const stateColors = {
 		"Recien llegado": "#1B6CA8",
@@ -34,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		"Vendidos": "#E67BB0",
 		"Anular": "#E04B4B",
 		"Anulado": "#E04B4B",
-		"Anulados": "#E04B4B"
+		"Anulados": "#E04B4B",
+		"Con Evaluación Profesional": "#3B7DDD"
 	};
 
 	const stateIcons = {
@@ -44,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		"Vendidos": "shopping-cart",
 		"Anular": "x-circle",
 		"Anulado": "x-circle",
-		"Anulados": "x-circle"
+		"Anulados": "x-circle",
+		"Con Evaluación Profesional": "layers"
 	};
 
 	const createBadge = (text, color, iconName) => {
@@ -111,26 +100,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				fechaRegistro.appendChild(horaText);
 			}
 
-			const registroBadge = document.createElement("span");
-			registroBadge.className = "badge bg-primary mt-1";
-			registroBadge.textContent = item.Registro || "-";
-			fechaRegistro.appendChild(registroBadge);
-
 			tr.appendChild(fechaRegistro);
 
 			const lead = document.createElement("td");
-			if (item.EsProspecto === true) {
-				const icon = document.createElement("i");
-				icon.setAttribute("data-feather", "star");
-				icon.setAttribute("fill", "#fcb92c");
-				icon.setAttribute("stroke", "#fcb92c");
-				icon.className = "me-1";
-				icon.style.width = "12px";
-				icon.style.height = "12px";
-				icon.style.color = "#fcb92c";
-				lead.appendChild(icon);
-			}
-			lead.appendChild(document.createTextNode(item.Lead || "-"));
+			lead.textContent = item.Lead || "-";
 			tr.appendChild(lead);
 
 			const pais = document.createElement("td");
@@ -150,14 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			tr.appendChild(pais);
 
 			const broker = document.createElement("td");
-			broker.textContent = item.Broker || "-";
+			broker.textContent = item.BrokerActual || "-";
 			tr.appendChild(broker);
 
-			const clasificacion = document.createElement("td");
-			const clasificacionColor = classificationColors[item.Clasificacion] || "#6C757D";
-			const clasificacionIcon = classificationIcons[item.Clasificacion];
-			clasificacion.appendChild(createBadge(item.Clasificacion, clasificacionColor, clasificacionIcon));
-			tr.appendChild(clasificacion);
+			const objetivo = document.createElement("td");
+			objetivo.textContent = item.ObjetivoPrincipal || "-";
+			tr.appendChild(objetivo);
 
 			const estado = document.createElement("td");
 			const estadoColor = stateColors[item.Estado] || "#6C757D";
@@ -168,10 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			const accion = document.createElement("td");
 			accion.className = "text-end";
 			const link = document.createElement("a");
-			const idic = encodeURIComponent(item.IDIC || "");
-			link.href = baseUrl + "/pages/lead/detalle.php?idic=" + idic;
+			const ider = encodeURIComponent(item.IDER || "");
+			link.href = baseUrl + "/pages/eva-rapida/eva-rapida.php?IDER=" + ider;
 			link.className = "btn btn-sm btn-primary rounded-pill";
-			link.textContent = "Ver lead";
+			link.textContent = "Ver Eva. Rápida";
 			accion.appendChild(link);
 			tr.appendChild(accion);
 
@@ -196,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const visibleRows = cachedRows.slice(startIndex, endIndex);
 
 		if (totalLabel) {
-			totalLabel.textContent = "Total de leads: " + total;
+			totalLabel.textContent = "Total de evaluaciones: " + total;
 		}
 
 		if (rangeLabel) {
@@ -216,17 +187,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const fetchData = async () => {
 		try {
-			const response = await fetch("https://auto.myduomarkets.com/webhook/ic/lead", {
+			const response = await fetch("https://auto.myduomarkets.com/webhook/ic/evalucaionesrapidas", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
 				},
-			body: JSON.stringify({
-				tipo: "Estado",
-				valor: "Recien llegado",
-				token
-			})
-		});
+				body: JSON.stringify({
+					token,
+					estado: estadoValue || "Recien llegado"
+				})
+			});
 
 			const data = await response.json();
 
@@ -238,14 +208,24 @@ document.addEventListener("DOMContentLoaded", () => {
 			let rows = [];
 			let cantidadListados = null;
 			if (Array.isArray(data)) {
-				if (data.length === 1 && data[0] && Array.isArray(data[0].data)) {
-					rows = data[0].data;
-				} else if (data.length && data[0] && data[0].Tabla) {
-					rows = data.map((item) => item && item.Tabla).filter(Boolean);
+				if (data.length && data[0] && data[0].Tabla) {
+					rows = data
+						.map((item) => {
+							if (!item || !item.Tabla) {
+								return null;
+							}
+							return {
+								...item.Tabla,
+								CantidadListados: item.CantidadListados !== undefined ? item.CantidadListados : item.CantidadListado
+							};
+						})
+						.filter(Boolean);
 					const first = data.find((item) => item && (item.CantidadListados !== undefined || item.CantidadListado !== undefined));
 					if (first) {
 						cantidadListados = first.CantidadListados !== undefined ? first.CantidadListados : first.CantidadListado;
 					}
+				} else if (data.length === 1 && data[0] && Array.isArray(data[0].data)) {
+					rows = data[0].data;
 				} else {
 					rows = data;
 				}

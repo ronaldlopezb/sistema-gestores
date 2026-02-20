@@ -134,7 +134,19 @@ document.addEventListener("DOMContentLoaded", () => {
 			tr.appendChild(lead);
 
 			const pais = document.createElement("td");
-			pais.textContent = item.Pais || "-";
+			if (item.Bandera) {
+				const flag = document.createElement("img");
+				flag.src = item.Bandera;
+				flag.alt = item.Pais ? "Bandera de " + item.Pais : "Bandera";
+				flag.width = 16;
+				flag.height = 12;
+				flag.loading = "lazy";
+				flag.style.objectFit = "cover";
+				flag.style.marginRight = "6px";
+				flag.style.verticalAlign = "middle";
+				pais.appendChild(flag);
+			}
+			pais.appendChild(document.createTextNode(item.Pais || "-"));
 			tr.appendChild(pais);
 
 			const broker = document.createElement("td");

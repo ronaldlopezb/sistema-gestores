@@ -1,0 +1,32 @@
+[
+  {
+    "Funnel": {
+      "Id": 4,
+      "Nombre": "Funnel de prueba RLB",
+      "Descripcion": "Decripcion del Funnel de prueba RLB",
+      "Activo": true
+    },
+    "Etapas": [
+      {
+        "Id": 3,
+        "Etapa": "aaaa",
+        "Orden": 1
+      },
+      {
+        "Id": 4,
+        "Etapa": "ssss",
+        "Orden": 2
+      },
+      {
+        "Id": 5,
+        "Etapa": "dddd",
+        "Orden": 3
+      },
+      {
+        "Id": 6,
+        "Etapa": "ffff",
+        "Orden": 4
+      }
+    ]
+  }
+]

@@ -50,6 +50,14 @@
 			margin: 1.75rem auto;
 		}
 
+		.modal-dialog.modal-lg {
+			max-width: 900px;
+		}
+
+		.modal-dialog.modal-xl {
+			max-width: 880px;
+		}
+
 		.modal-content {
 			background: #fff;
 			border-radius: 0.5rem;
@@ -249,12 +257,10 @@
 
 								<!-- BOTONES TABS -->
 								<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-									<div class="d-flex flex-wrap gap-2" role="tablist">
-										<button class="btn btn-outline-primary rounded-pill active" data-bs-toggle="tab" data-bs-target="#tab-ic" type="button" role="tab">Inteligencia Comercial</button>
-										<button class="btn btn-outline-primary rounded-pill" data-bs-toggle="tab" data-bs-target="#tab-profesional" type="button" role="tab">Evaluación Profesional</button>
-										<button class="btn btn-outline-primary rounded-pill" data-bs-toggle="tab" data-bs-target="#tab-rapida" type="button" role="tab">Evaluación Rápida</button>
-										<button class="btn btn-outline-primary rounded-pill" data-bs-toggle="tab" data-bs-target="#tab-seguimiento" type="button" role="tab">Seguimiento</button>
-									</div>
+										<div class="d-flex flex-wrap gap-2" role="tablist">
+											<button class="btn btn-outline-primary rounded-pill active" data-bs-toggle="tab" data-bs-target="#tab-ic" type="button" role="tab">Inteligencia Comercial</button>
+											<button class="btn btn-outline-primary rounded-pill" data-bs-toggle="tab" data-bs-target="#tab-seguimiento" type="button" role="tab">Seguimiento</button>
+										</div>
 									<div class="d-inline-flex gap-2" role="group">
 										<button type="button" class="btn btn-primary btn-sm rounded-pill" id="lead-estado-update"><i data-feather="refresh-cw" class="me-1"></i>Actualizar Estado</button>
 										<button type="button" class="btn btn-success btn-sm rounded-pill" id="prospecto-toggle"><i data-feather="user-check" class="me-1"></i>Marcar como Prospecto</button>
@@ -267,21 +273,33 @@
 									<!-- TAB: INTELIGENCIA COMERCIAL -->
 									<div class="tab-pane fade show active" id="tab-ic" role="tabpanel">
 										
-										<div id="ic-header">
-											<div class="card mb-3">
-												<div class="card-body d-flex align-items-center justify-content-between gap-3 flex-wrap">
-													<div>
-														<div class="d-flex align-items-center gap-2 mb-2">
-															<span class="badge bg-primary">MenteInversora</span>
-															<span class="badge bg-light text-dark">Dossier Comercial</span>
+									<div id="ic-header">
+										<div class="row g-3 mb-3">
+											<div class="col-12 col-lg-9">
+												<div class="card h-100">
+													<div class="card-body d-flex align-items-center justify-content-between gap-3 flex-wrap">
+														<div>
+															<div class="d-flex align-items-center gap-2 mb-2">
+																<span class="badge bg-primary">MenteInversora</span>
+																<span class="badge bg-light text-dark">Dossier Comercial</span>
+															</div>
+															<h4 class="mb-2 fw-semibold text-dark"><i data-feather="file-text" class="me-2"></i>Dossier de Inteligencia Comercial</h4>
+															<p class="text-muted mb-0">Documento interno para estrategia de ventas y priorización de leads.</p>
 														</div>
-													<h4 class="mb-2 fw-semibold text-dark"><i data-feather="file-text" class="me-2"></i>Dossier de Inteligencia Comercial</h4>
-														<p class="text-muted mb-0">Documento interno para estrategia de ventas y priorización de leads.</p>
+														<span class="badge bg-primary">Uso interno · Confidencial</span>
 													</div>
-													<span class="badge bg-primary">Uso interno · Confidencial</span>
+												</div>
+											</div>
+											<div class="col-12 col-lg-3">
+												<div class="card h-100">
+													<div class="card-body d-flex flex-column justify-content-center gap-2">
+														<button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#evaluacion-profesional-modal">Evaluación Profesional</button>
+														<button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#evaluacion-rapida-modal">Evaluación Rápida</button>
+													</div>
 												</div>
 											</div>
 										</div>
+									</div>
 
 										<div id="ic-score-comercial-interno" class="fs-6">
 											<div class="card mb-3">
@@ -432,45 +450,7 @@
 
 									</div>
 
-									<!-- TAB: EVALUACIÓN PROFESIONAL -->
-									<div class="tab-pane fade" id="tab-profesional" role="tabpanel">
-										<div id="ep-header">
-											<div class="card mb-3">
-												<div class="card-body d-flex align-items-center justify-content-between gap-3 flex-wrap">
-													<div>
-														<div class="d-flex align-items-center gap-2 mb-2">
-															<span class="badge bg-primary">MenteInversora</span>
-															<span class="badge bg-light text-dark">Auditoría Técnica</span>
-														</div>
-														<h4 class="mb-2 fw-semibold text-dark"><i data-feather="file-text" class="me-2"></i>Auditoría Técnica de Condiciones Operativas</h4>
-														<p class="text-muted mb-0">Diagnóstico técnico y estimación de fugas de capital por estructura operativa:<BR> rebates, spreads y condiciones negociables según perfil del gestor..</p>
-													</div>
-													<span class="badge bg-primary">Informe Confidencial - Uso Profesional</span>
-												</div>
-											</div>
-										</div>
-									</div>
-
-										<!-- TAB: EVALUACIÓN RÁPIDA -->
-									<div class="tab-pane fade" id="tab-rapida" role="tabpanel">
-										<div id="er-header">
-											<div class="card mb-3">
-												<div class="card-body d-flex align-items-center justify-content-between gap-3 flex-wrap">
-													<div>
-														<div class="d-flex align-items-center gap-2 mb-2">
-															<span class="badge bg-primary">MenteInversora</span>
-															<span class="badge bg-light text-dark">Dossier de Marca</span>
-														</div>
-														<h4 class="mb-2 fw-semibold text-dark"><i data-feather="file-text" class="me-2"></i>Dossier de Marca Personal</h4>
-														<p class="text-muted mb-0">Documento profesional para presentación ante inversores, brókers y aliados estratégicos..</p>
-													</div>
-													<span class="badge bg-primary">Documento certificado - Uso profesional</span>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<!-- TAB: SEGUIMIENTO -->
+										<!-- TAB: SEGUIMIENTO -->
 									<div class="tab-pane fade" id="tab-seguimiento" role="tabpanel">
 										<div id="seg-header">
 											<div class="card mb-3">
@@ -515,6 +495,60 @@
 
 	<?php include '../../includes/scripts.php'; ?>
 	<script src="<?php echo $baseUrl; ?>/js/lead-detalle.js"></script>
+
+	<!-- MODAL EVALUACION PROFESIONAL -->
+	<div class="modal fade" id="evaluacion-profesional-modal" tabindex="-1" aria-labelledby="evaluacion-profesional-modal-label" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="evaluacion-profesional-modal-label">Evaluación Profesional</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+				</div>
+				<div class="modal-body">
+					<div class="card mb-0">
+						<div class="card-body d-flex align-items-center justify-content-between gap-3 flex-wrap">
+							<div>
+								<div class="d-flex align-items-center gap-2 mb-2">
+									<span class="badge bg-primary">MenteInversora</span>
+									<span class="badge bg-light text-dark">Auditoría Técnica</span>
+								</div>
+								<h4 class="mb-2 fw-semibold text-dark"><i data-feather="file-text" class="me-2"></i>Auditoría Técnica de Condiciones Operativas</h4>
+								<p class="text-muted mb-0">Diagnóstico técnico y estimación de fugas de capital por estructura operativa:<br> rebates, spreads y condiciones negociables según perfil del gestor..</p>
+							</div>
+							<span class="badge bg-primary">Informe Confidencial - Uso Profesional</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- MODAL EVALUACION RAPIDA -->
+	<div class="modal fade" id="evaluacion-rapida-modal" tabindex="-1" aria-labelledby="evaluacion-rapida-modal-label" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="evaluacion-rapida-modal-label">Evaluación Rápida</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+				</div>
+				<div class="modal-body">
+					<div class="card mb-0">
+						<div class="card-body d-flex align-items-center justify-content-between gap-3 flex-wrap">
+							<div>
+								<div class="d-flex align-items-center gap-2 mb-2">
+									<span class="badge bg-primary">MenteInversora</span>
+									<span class="badge bg-light text-dark">Dossier de Marca</span>
+								</div>
+								<h4 class="mb-2 fw-semibold text-dark"><i data-feather="file-text" class="me-2"></i>Dossier de Marca Personal</h4>
+								<p class="text-muted mb-0">Documento profesional para presentación ante inversores, brókers y aliados estratégicos..</p>
+							</div>
+							<span class="badge bg-primary">Documento certificado - Uso profesional</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- MODAL PROGRESO PROSPECTO -->
 	<div class="modal fade" id="prospecto-modal" tabindex="-1" aria-labelledby="prospecto-modal-label" aria-hidden="true">

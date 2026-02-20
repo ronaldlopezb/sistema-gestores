@@ -15,6 +15,23 @@
 
 	<link href="assets/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+		.dashboard-spinner {
+			display: inline-block;
+			width: 12px;
+			height: 12px;
+			border: 2px solid #fff;
+			border-right-color: transparent;
+			border-radius: 50%;
+			animation: dashboard-spin 0.6s linear infinite;
+		}
+
+		@keyframes dashboard-spin {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
 </head>
 
 <body>
@@ -27,7 +44,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-2">Dashboard de Analiticas</h1>
+					<h1 class="h3 mb-2">Dashboard de Leads</h1>
 
 					<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #f8f9fb 0%, #ffffff 60%);">
 						<div class="card-body">
@@ -40,13 +57,15 @@
 									<label class="form-label" for="filtro-periodo">Periodo rapido</label>
 									<select class="form-select" id="filtro-periodo">
 										<option value="hoy">Hoy</option>
-										<option value="semana">Esta Semana</option>
-										<option value="15-dias">Ultimos 15 días</option>
-										<option value="mes">Este Mes</option>
-										<option value="3-meses">Ultimos 3 meses</option>
-										<option value="6-meses">Ultimos 6 meses</option>
-										<option value="1-ano">Ultimo año</option>
+									<option value="semana">Esta semana</option>
+									<option value="15-dias">Últimos 15 días</option>
+									<option value="mes">Este mes</option>
+									<option value="3-meses">Últimos 3 meses</option>
+									<option value="6-meses">Últimos 6 meses</option>
+									<option value="1-ano">Año actual</option>
 										<option value="todo">Todo</option>
+									<option value="personalizado-1-dia">Personalizado: 1 día</option>
+									<option value="personalizado-rango">Personalizado: Rango de fechas</option>
 									</select>
 								</div>
 								<div class="col-12 col-md-4 col-xl-3">
@@ -57,14 +76,17 @@
 									<label class="form-label" for="filtro-hasta">Hasta</label>
 									<input type="date" class="form-control" id="filtro-hasta">
 								</div>
-								<div class="col-12 col-xl-3 d-grid d-md-flex">
-									<button type="button" class="btn btn-primary w-100 px-4" id="filtro-aplicar">
-										<i class="align-middle me-1" data-feather="filter"></i>Filtrar
-									</button>
+									<div class="col-12 col-xl-3 d-grid d-md-flex">
+										<button type="button" class="btn btn-primary w-100 px-4" id="filtro-aplicar">
+											<i class="align-middle me-1" data-feather="filter"></i>Filtrar
+										</button>
+									</div>
+								</div>
+								<div class="mt-3">
+									<span class="badge bg-light text-primary" id="dashboard-periodo-titulo">Filtro sin aplicar</span>
 								</div>
 							</div>
 						</div>
-					</div>
 
 					<div class="row">
 						<div class="col-xl-6 col-xxl-5 d-flex">
@@ -75,40 +97,40 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Sales</h5>
+											<h5 class="card-title">Leads nuevos</h5>
 													</div>
 
 													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
-														</div>
+												<div class="stat text-primary">
+													<i class="align-middle" data-feather="user-plus"></i>
+												</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
-												<div class="mb-0">
-													<span class="text-danger">-3.65%</span>
-													<span class="text-muted">Since last week</span>
-												</div>
+							<h1 class="mt-1 mb-3" id="kpi-leads-nuevos">0</h1>
+							<div class="mb-0">
+							<span class="text-success" id="kpi-leads-nuevos-var">0%</span>
+							<span class="text-muted">Vs periodo anterior</span>
+							</div>
 											</div>
 										</div>
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Visitors</h5>
+											<h5 class="card-title">Leads en trabajo</h5>
 													</div>
 
 													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="users"></i>
-														</div>
+												<div class="stat text-primary">
+													<i class="align-middle" data-feather="briefcase"></i>
+												</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
-												<div class="mb-0">
-													<span class="text-success">5.25%</span>
-													<span class="text-muted">Since last week</span>
-												</div>
+							<h1 class="mt-1 mb-3" id="kpi-leads-trabajo">0</h1>
+							<div class="mb-0">
+							<span class="text-success" id="kpi-leads-trabajo-var">0%</span>
+							<span class="text-muted">Vs periodo anterior</span>
+							</div>
 											</div>
 										</div>
 									</div>
@@ -117,27 +139,27 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Earnings</h5>
+											<h5 class="card-title">Prospectos activos</h5>
 													</div>
 
 													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
-														</div>
+												<div class="stat text-primary">
+													<i class="align-middle" data-feather="user-check"></i>
+												</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">$21.300</h1>
-												<div class="mb-0">
-													<span class="text-success">6.65%</span>
-													<span class="text-muted">Since last week</span>
-												</div>
+							<h1 class="mt-1 mb-3" id="kpi-prospectos-activos">0</h1>
+							<div class="mb-0">
+							<span class="text-success" id="kpi-prospectos-activos-var">0%</span>
+							<span class="text-muted">Vs periodo anterior</span>
+							</div>
 											</div>
 										</div>
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Orders</h5>
+											<h5 class="card-title">Vendidos</h5>
 													</div>
 
 													<div class="col-auto">
@@ -146,11 +168,11 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">64</h1>
-												<div class="mb-0">
-													<span class="text-danger">-2.25%</span>
-													<span class="text-muted">Since last week</span>
-												</div>
+							<h1 class="mt-1 mb-3" id="kpi-vendidos">0</h1>
+							<div class="mb-0">
+							<span class="text-success" id="kpi-vendidos-var">0%</span>
+							<span class="text-muted">Tasa de conversión</span>
+							</div>
 											</div>
 										</div>
 									</div>
@@ -162,7 +184,7 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Recent Movement</h5>
+										<h5 class="card-title mb-0">Tendencia de leads</h5>
 								</div>
 								<div class="card-body py-3">
 									<div class="chart chart-sm">
@@ -174,156 +196,154 @@
 					</div>
 
 					<div class="row">
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-
-									<h5 class="card-title mb-0">Browser Usage</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="py-3">
-											<div class="chart chart-xs">
-												<canvas id="chartjs-dashboard-pie"></canvas>
-											</div>
-										</div>
-
-										<table class="table mb-0">
-											<tbody>
-												<tr>
-													<td>Chrome</td>
-													<td class="text-end">4306</td>
-												</tr>
-												<tr>
-													<td>Firefox</td>
-													<td class="text-end">3801</td>
-												</tr>
-												<tr>
-													<td>IE</td>
-													<td class="text-end">1689</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-
-									<h5 class="card-title mb-0">Real-Time</h5>
-								</div>
-								<div class="card-body px-4">
-									<div id="world_map" style="height:350px;"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
+						<div class="col-12 col-md-6 col-xxl-4 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
-
-									<h5 class="card-title mb-0">Calendar</h5>
+									<h5 class="card-title mb-0">Ranking por pais</h5>
+									<span class="text-muted small">Leads en el periodo</span>
 								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="chart">
-											<div id="datetimepicker-dashboard"></div>
-										</div>
-									</div>
+								<div class="card-body">
+									<table class="table table-sm align-middle mb-0">
+										<thead>
+											<tr>
+												<th>Pais</th>
+												<th class="text-end">Leads</th>
+												<th class="text-end">% total</th>
+											</tr>
+										</thead>
+									<tbody id="ranking-pais-body">
+										<tr>
+											<td colspan="3" class="text-center text-muted">Sin datos</td>
+										</tr>
+									</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-6 col-xxl-4 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Paises con mayor conversion</h5>
+									<span class="text-muted small">Vendidos / Leads</span>
+								</div>
+								<div class="card-body">
+									<table class="table table-sm align-middle mb-0">
+										<thead>
+											<tr>
+												<th>Pais</th>
+												<th class="text-end">Conversion</th>
+												<th class="text-end">Leads</th>
+											</tr>
+										</thead>
+									<tbody id="conversion-pais-body">
+										<tr>
+											<td colspan="3" class="text-center text-muted">Sin datos</td>
+										</tr>
+									</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-12 col-xxl-4 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Ranking de brokers por leads</h5>
+									<span class="text-muted small">Participacion del total</span>
+								</div>
+								<div class="card-body">
+									<table class="table table-sm align-middle mb-0">
+										<thead>
+											<tr>
+												<th>Broker</th>
+												<th class="text-end">Leads</th>
+												<th class="text-end">% total</th>
+											</tr>
+										</thead>
+									<tbody id="ranking-broker-body">
+										<tr>
+											<td colspan="3" class="text-center text-muted">Sin datos</td>
+										</tr>
+									</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+					<div class="row mt-4">
+						<div class="col-12 col-lg-6 col-xxl-6 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
-
-									<h5 class="card-title mb-0">Latest Projects</h5>
+									<h5 class="card-title mb-0">Top prospectos</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th class="d-none d-xl-table-cell">Start Date</th>
-											<th class="d-none d-xl-table-cell">End Date</th>
-											<th>Status</th>
-											<th class="d-none d-md-table-cell">Assignee</th>
+											<th>Fecha</th>
+											<th>Prospecto</th>
+											<th style="width: 200px;">% avance</th>
+											<th>Broker</th>
+											<th>Clasificacion</th>
+											<th class="text-end" style="width: 90px;">Accion</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-danger">Cancelled</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Christina Mason</td>
-										</tr>
-										<tr>
-											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-									</tbody>
+								<tbody id="top-prospectos-body">
+									<tr>
+										<td colspan="6" class="text-center text-muted">Sin datos</td>
+									</tr>
+								</tbody>
 								</table>
 							</div>
 						</div>
-						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
-							<div class="card flex-fill w-100">
+						<div class="col-12 col-lg-3 col-xxl-3 d-flex">
+							<div class="card flex-fill">
 								<div class="card-header">
-
-									<h5 class="card-title mb-0">Monthly Sales</h5>
+									<h5 class="card-title mb-0">Prospectos por clasificacion</h5>
 								</div>
-								<div class="card-body d-flex w-100">
-									<div class="align-self-center chart chart-lg">
-										<canvas id="chartjs-dashboard-bar"></canvas>
+								<div class="card-body">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-prospectos-clasificacion-alt"></canvas>
 									</div>
+									<table class="table table-sm align-middle mb-0 mt-3">
+										<thead>
+											<tr>
+												<th>Clasificacion</th>
+												<th class="text-end">Total</th>
+												<th class="text-end">% total</th>
+										</tr>
+										</thead>
+								<tbody id="prospectos-clasificacion-body">
+									<tr>
+										<td colspan="3" class="text-center text-muted">Sin datos</td>
+									</tr>
+								</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-lg-3 col-xxl-3 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Prospectos por avance</h5>
+								</div>
+								<div class="card-body">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-prospectos-avance-alt"></canvas>
+									</div>
+									<table class="table table-sm align-middle mb-0 mt-3">
+										<thead>
+											<tr>
+												<th>Rango %</th>
+												<th class="text-end">Total</th>
+												<th class="text-end">% total</th>
+										</tr>
+										</thead>
+								<tbody id="prospectos-avance-body">
+									<tr>
+										<td colspan="3" class="text-center text-muted">Sin datos</td>
+									</tr>
+								</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -337,228 +357,7 @@
 	</div>
 
 	<?php include 'includes/scripts.php'; ?>
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
-			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-			// Line chart
-			new Chart(document.getElementById("chartjs-dashboard-line"), {
-				type: "line",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "Sales ($)",
-						fill: true,
-						backgroundColor: gradient,
-						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					tooltips: {
-						intersect: false
-					},
-					hover: {
-						intersect: true
-					},
-					plugins: {
-						filler: {
-							propagate: false
-						}
-					},
-					scales: {
-						xAxes: [{
-							reverse: true,
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}],
-						yAxes: [{
-							ticks: {
-								stepSize: 1000
-							},
-							display: true,
-							borderDash: [3, 3],
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			// Pie chart
-			new Chart(document.getElementById("chartjs-dashboard-pie"), {
-				type: "pie",
-				data: {
-					labels: ["Chrome", "Firefox", "IE"],
-					datasets: [{
-						data: [4306, 3801, 1689],
-						backgroundColor: [
-							window.theme.primary,
-							window.theme.warning,
-							window.theme.danger
-						],
-						borderWidth: 5
-					}]
-				},
-				options: {
-					responsive: !window.MSInputMethodContext,
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					cutoutPercentage: 75
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			// Bar chart
-			new Chart(document.getElementById("chartjs-dashboard-bar"), {
-				type: "bar",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "This year",
-						backgroundColor: window.theme.primary,
-						borderColor: window.theme.primary,
-						hoverBackgroundColor: window.theme.primary,
-						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-						barPercentage: .75,
-						categoryPercentage: .5
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					scales: {
-						yAxes: [{
-							gridLines: {
-								display: false
-							},
-							stacked: false,
-							ticks: {
-								stepSize: 20
-							}
-						}],
-						xAxes: [{
-							stacked: false,
-							gridLines: {
-								color: "transparent"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			var markers = [{
-				coords: [31.230391, 121.473701],
-				name: "Shanghai"
-			},
-			{
-				coords: [28.704060, 77.102493],
-				name: "Delhi"
-			},
-			{
-				coords: [6.524379, 3.379206],
-				name: "Lagos"
-			},
-			{
-				coords: [35.689487, 139.691711],
-				name: "Tokyo"
-			},
-			{
-				coords: [23.129110, 113.264381],
-				name: "Guangzhou"
-			},
-			{
-				coords: [40.7127837, -74.0059413],
-				name: "New York"
-			},
-			{
-				coords: [34.052235, -118.243683],
-				name: "Los Angeles"
-			},
-			{
-				coords: [41.878113, -87.629799],
-				name: "Chicago"
-			},
-			{
-				coords: [51.507351, -0.127758],
-				name: "London"
-			},
-			{
-				coords: [40.416775, -3.703790],
-				name: "Madrid "
-			}
-			];
-			var map = new jsVectorMap({
-				map: "world",
-				selector: "#world_map",
-				zoomButtons: true,
-				markers: markers,
-				markerStyle: {
-					initial: {
-						r: 9,
-						strokeWidth: 7,
-						stokeOpacity: .4,
-						fill: window.theme.primary
-					},
-					hover: {
-						fill: window.theme.primary,
-						stroke: window.theme.primary
-					}
-				},
-				zoomOnScroll: false
-			});
-			window.addEventListener("resize", () => {
-				map.updateSize();
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-			document.getElementById("datetimepicker-dashboard").flatpickr({
-				inline: true,
-				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-				nextArrow: "<span title=\"Next month\">&raquo;</span>",
-				defaultDate: defaultDate
-			});
-		});
-	</script>
+	<script src="js/dashboard.js"></script>
 
 </body>
 

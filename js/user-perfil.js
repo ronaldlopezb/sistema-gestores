@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const correoInput = document.getElementById("perfil-correo");
 	const cantidadInput = document.getElementById("perfil-cantidad-listados");
 	const filtroSelect = document.getElementById("perfil-filtro-predeterminado");
+	const filtroAutomaticoSelect = document.getElementById("perfil-filtro-automatico");
 	const fotoPreview = document.getElementById("perfil-foto-preview");
 	const fotoInput = document.getElementById("perfil-foto");
 	const changePasswordButton = document.getElementById("perfil-clave-cambiar");
@@ -32,29 +33,43 @@ document.addEventListener("DOMContentLoaded", () => {
 		saveDatosButton.disabled = !isValid;
 	};
 
+	const normalizeFiltro = (value) => {
+		return String(value || "")
+			.trim()
+			.toLowerCase()
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "")
+			.replace(/\s+/g, " ");
+	};
+
 	const filtroMap = {
-		"Hoy": "hoy",
-		"Esta Semana": "semana",
-		"Ultimos 15 dias": "15-dias",
-		"Este Mes": "mes",
-		"Ultimos 3 meses": "3-meses",
-		"Ultimos 6 meses": "6-meses",
+		"hoy": "hoy",
+		"esta semana": "semana",
+		"ultimos 15 dias": "15-dias",
+		"este mes": "mes",
+		"ultimos 3 meses": "3-meses",
+		"ultimos 6 meses": "6-meses",
+		"ano actual": "1-ano",
+		"ultimo ano": "1-ano",
 		"1 ano": "1-ano",
-		"Todo": "todo"
+		"todo": "todo"
 	};
 
 	const applyFiltroValue = (rawValue) => {
 		if (!filtroSelect) {
 			return;
 		}
-		const trimmed = String(rawValue || "").trim();
-		if (!trimmed) {
+		const normalized = normalizeFiltro(rawValue);
+		if (!normalized) {
 			return;
 		}
-		const mapped = filtroMap[trimmed] || trimmed;
-		const optionExists = Array.from(filtroSelect.options).some((option) => option.value === mapped);
-		if (optionExists) {
-			filtroSelect.value = mapped;
+		const mapped = filtroMap[normalized] || "";
+		const optionList = Array.from(filtroSelect.options);
+		const resolvedValue = mapped
+			? mapped
+			: (optionList.find((option) => normalizeFiltro(option.textContent) === normalized) || {}).value;
+		if (resolvedValue) {
+			filtroSelect.value = resolvedValue;
 		}
 	};
 
@@ -70,6 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		if (cantidadInput) {
 			cantidadInput.value = data.CantidadListados || "";
+		}
+		if (filtroAutomaticoSelect) {
+			const filtroAutomaticoValue = data.FiltroAutomatico === true ? "true" : "false";
+			filtroAutomaticoSelect.value = filtroAutomaticoValue;
 		}
 		if (fotoPreview && data.Foto) {
 			fotoPreview.src = data.Foto;
@@ -285,7 +304,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			sendUpdate({
 				tipo: "Preferencias",
 				CantidadListados: cantidadValue,
-				FiltroPredeterminado: filtroSelect ? filtroSelect.options[filtroSelect.selectedIndex].text : ""
+				FiltroPredeterminado: filtroSelect ? filtroSelect.options[filtroSelect.selectedIndex].text : "",
+				FiltroAutomatico: filtroAutomaticoSelect ? filtroAutomaticoSelect.value === "true" : false
 			}, alertPreferencias, savePreferenciasButton, {
 				success: "Se guardaron sus preferencias",
 				error: "No se pudo guardar los datos"
