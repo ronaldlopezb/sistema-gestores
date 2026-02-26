@@ -46,7 +46,7 @@
 
 					<h1 class="h3 mb-2">Dashboard de Leads</h1>
 
-					<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #f8f9fb 0%, #ffffff 60%);">
+					<div class="card border-0 shadow-sm mb-4" style="background: #ffffff;">
 						<div class="card-body">
 							<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
 								<div class="h5 mb-0">Filtros · Periodo de analisis</div>

@@ -7,9 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	const objetivo = document.getElementById("eva-objetivo");
 	const infoName = document.getElementById("eva-info-name");
 	const infoEmail = document.getElementById("eva-info-email");
+	const infoWhatsapp = document.getElementById("eva-info-whatsapp");
 	const infoCountry = document.getElementById("eva-info-country");
 	const infoNameItem = document.getElementById("eva-info-name-item");
 	const infoEmailItem = document.getElementById("eva-info-email-item");
+	const infoWhatsappItem = document.getElementById("eva-info-whatsapp-item");
 	const infoCountryItem = document.getElementById("eva-info-country-item");
 	const traderBroker = document.getElementById("eva-trader-broker");
 	const traderPrograma = document.getElementById("eva-trader-programa");
@@ -145,6 +147,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		element.innerHTML = formatted;
 	};
 
+	const setWhatsappLink = (element, value, name, itemElement) => {
+		if (!element) {
+			return;
+		}
+		const raw = value ? String(value).trim() : "";
+		const cleaned = raw.replace(/[^\d]/g, "");
+		if (!raw || !cleaned) {
+			if (itemElement) {
+				itemElement.classList.add("d-none");
+			}
+			return;
+		}
+		if (itemElement) {
+			itemElement.classList.remove("d-none");
+		}
+		const textName = name ? String(name).trim() : "";
+		const greeting = textName ? "Hola " + textName : "Hola";
+		const textParam = encodeURIComponent(greeting);
+		element.href = "https://wa.me/" + cleaned + "?text=" + textParam;
+		element.textContent = raw;
+	};
+
 	const updateEstadoSelect = (estado) => {
 		if (!estadoSelect) {
 			return;
@@ -241,6 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			setTextValue(name, lead.NombreCompleto);
 			setTextValue(infoName, lead.NombreCompleto, infoNameItem);
 			setTextValue(infoEmail, lead.CorreoElectronico, infoEmailItem);
+			setWhatsappLink(infoWhatsapp, lead.WhatsApp, lead.NombreCompleto, infoWhatsappItem);
 			setTextValue(infoCountry, lead.Pais, infoCountryItem);
 			setTextValue(traderBroker, trader.BrokerActual, traderBrokerItem);
 			setTextValue(traderPrograma, trader.TipoPrograma, traderProgramaItem);

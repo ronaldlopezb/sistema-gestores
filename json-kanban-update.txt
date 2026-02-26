@@ -1,0 +1,33 @@
+Caso 1: Cambio de Orden (misma etapa)                                                                                   json-board.txt                    -23   
+     {                                                                                                                       json-kanban.txt                  +201   
+       Tipo: Cambio de Orden,                                                                                                kanban.png                              
+       IdFunnel: 6,                                                                                                          pages/funnels/funnel.php    +151 -232   
+       IdEtapa: 25,                                                                                                                                                  
+       LeadsOrden: [                                                                                                                                                 
+         { IdLeadFunnel: 103, Orden: 1 },                                                                                                                            
+         { IdLeadFunnel: 101, Orden: 2 },                                                                                                                            
+         { IdLeadFunnel: 102, Orden: 3 }                                                                                                                             
+       ]                                                                                                                                                             
+     }                                                                                                                                                               
+                                                                                                                                                                     
+Caso 2: Cambio de Etapa y Orden                                                                                                                                 
+     {                                                                                                                                                               
+       Tipo: Cambio de Etapa y Orden,                                                                                                                                
+       IdFunnel: 6,                                                                                                                                                  
+       Movimiento: {                                                                                                                                                 
+         IdLeadFunnel: 102,                                                                                                                                          
+         IdEtapaAnterior: 25,                                                                                                                                        
+         IdEtapaNueva: 27                                                                                                                                            
+       },                                                                                                                                                            
+       Ordenes: {                                                                                                                                                    
+         EtapaAnterior: [                                                                                                                                            
+           { IdLeadFunnel: 101, Orden: 1 },                                                                                                                          
+           { IdLeadFunnel: 103, Orden: 2 }                                                                                                                           
+         ],                                                                                                                                                          
+         EtapaNueva: [                                                                                                                                               
+           { IdLeadFunnel: 201, Orden: 1 },                                                                                                                          
+           { IdLeadFunnel: 102, Orden: 2 },                                                                                                                          
+           { IdLeadFunnel: 202, Orden: 3 }                                                                                                                           
+         ]                                                                                                                                                           
+       }                                                                                                                                                             
+     }  

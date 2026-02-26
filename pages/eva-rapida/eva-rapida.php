@@ -456,12 +456,13 @@
 									<hr class="my-0" />
 									<div class="card-body">
 										<h5 class="h6 card-title">Informacion de la Lead</h5>
-										<ul class="list-unstyled mb-0">
-											<li class="mb-1" id="eva-info-name-item"><span data-feather="user" class="feather-sm me-1"></span><span class="text-muted">Nombre:</span> <span id="eva-info-name">-</span></li>
-											<li class="mb-1" id="eva-info-email-item"><span data-feather="mail" class="feather-sm me-1"></span><span class="text-muted">Correo:</span> <span id="eva-info-email">-</span></li>
-											<li class="mb-1" id="eva-info-country-item"><span data-feather="globe" class="feather-sm me-1"></span><span class="text-muted">Pais:</span> <span id="eva-info-country">-</span></li>
-										</ul>
-									</div>
+									<ul class="list-unstyled mb-0">
+										<li class="mb-1" id="eva-info-name-item"><span data-feather="user" class="feather-sm me-1"></span><span class="text-muted">Nombre:</span> <span id="eva-info-name">-</span></li>
+										<li class="mb-1" id="eva-info-email-item"><span data-feather="mail" class="feather-sm me-1"></span><span class="text-muted">Correo:</span> <span id="eva-info-email">-</span></li>
+										<li class="mb-1 d-none" id="eva-info-whatsapp-item"><span data-feather="message-circle" class="feather-sm me-1"></span><span class="text-muted">WhatsApp:</span> <a id="eva-info-whatsapp" href="#" target="_blank" rel="noopener noreferrer">-</a></li>
+										<li class="mb-1" id="eva-info-country-item"><span data-feather="globe" class="feather-sm me-1"></span><span class="text-muted">Pais:</span> <span id="eva-info-country">-</span></li>
+									</ul>
+								</div>
 									<hr class="my-0" />
 									<div class="card-body">
 										<h5 class="h6 card-title">Trader/Gestor</h5>

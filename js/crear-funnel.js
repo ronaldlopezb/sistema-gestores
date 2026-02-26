@@ -8,13 +8,56 @@ document.addEventListener("DOMContentLoaded", () => {
 	const submitError = document.getElementById("funnel-submit-error");
 	let stageCount = 0;
 	let isSubmitting = false;
+	let colorMenuListenerAdded = false;
+	const stageColors = [
+		{ color: "#3B7DDD", text: "#FFFFFF" },
+		{ color: "#0D6EFD", text: "#FFFFFF" },
+		{ color: "#5BC0EB", text: "#0B2E3A" },
+		{ color: "#2F9BEA", text: "#FFFFFF" },
+		{ color: "#1CBB8C", text: "#FFFFFF" },
+		{ color: "#2EAE6E", text: "#FFFFFF" },
+		{ color: "#7BC043", text: "#1B3A1B" },
+		{ color: "#F0B429", text: "#3A2A00" },
+		{ color: "#F7C948", text: "#3A2A00" },
+		{ color: "#F39C12", text: "#3A1F00" },
+		{ color: "#FD7E14", text: "#3A1F00" },
+		{ color: "#E04B4B", text: "#FFFFFF" },
+		{ color: "#DC3545", text: "#FFFFFF" },
+		{ color: "#E83E8C", text: "#FFFFFF" },
+		{ color: "#6F42C1", text: "#FFFFFF" },
+		{ color: "#8E44AD", text: "#FFFFFF" },
+		{ color: "#6C757D", text: "#FFFFFF" },
+		{ color: "#ADB5BD", text: "#1B1E21" },
+		{ color: "#20C997", text: "#0B2E2A" },
+		{ color: "#17A2B8", text: "#FFFFFF" }
+	];
+	const defaultStageColor = "#3B7DDD";
+
+	const closeAllColorMenus = () => {
+		const menus = document.querySelectorAll(".stage-color-menu.show");
+		menus.forEach((menu) => {
+			menu.classList.remove("show");
+		});
+	};
+
+	const ensureColorMenuListener = () => {
+		if (colorMenuListenerAdded) {
+			return;
+		}
+		colorMenuListenerAdded = true;
+		document.addEventListener("click", () => {
+			closeAllColorMenus();
+		});
+	};
 
 	const updateSubmitState = () => {
 		if (!submitButton) {
 			return;
 		}
 		const nameValue = funnelName ? funnelName.value.trim() : "";
-		const stageInputs = container ? Array.from(container.querySelectorAll(".stage-card input")) : [];
+		const stageInputs = container
+			? Array.from(container.querySelectorAll(".stage-card input[name=\"etapa_nombre[]\"]"))
+			: [];
 		const validStages = stageInputs.filter((input) => input.value.trim());
 		const hasRequiredStages = validStages.length >= 2 && validStages.length === stageInputs.length;
 		submitButton.disabled = isSubmitting || !nameValue || !hasRequiredStages;
@@ -109,6 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		const body = document.createElement("div");
 		body.className = "card-body";
 
+		const row = document.createElement("div");
+		row.className = "row g-3";
+
+		const nameCol = document.createElement("div");
+		nameCol.className = "col-12 col-md-7";
+
+		const colorCol = document.createElement("div");
+		colorCol.className = "col-12 col-md-5";
+
 		const label = document.createElement("label");
 		label.className = "form-label";
 		label.setAttribute("for", "stage-name-" + stageCount);
@@ -119,14 +171,99 @@ document.addEventListener("DOMContentLoaded", () => {
 		input.className = "form-control";
 		input.id = "stage-name-" + stageCount;
 		input.name = "etapa_nombre[]";
+		input.maxLength = 30;
 		input.placeholder = "Ej. Contacto inicial";
 		input.addEventListener("input", () => {
+			if (input.value.length > 30) {
+				input.value = input.value.slice(0, 30);
+			}
 			updateSubmitState();
 			setSubmitError("");
 		});
 
-		body.appendChild(label);
-		body.appendChild(input);
+		const colorLabel = document.createElement("label");
+		colorLabel.className = "form-label";
+		colorLabel.textContent = "Color de la etapa";
+
+		const colorInput = document.createElement("input");
+		colorInput.type = "hidden";
+		colorInput.name = "etapa_color[]";
+		colorInput.value = defaultStageColor;
+
+		const colorSelect = document.createElement("div");
+		colorSelect.className = "stage-color-select";
+
+		const colorTrigger = document.createElement("button");
+		colorTrigger.type = "button";
+		colorTrigger.className = "stage-color-trigger";
+		colorTrigger.setAttribute("aria-label", "Seleccionar color de etapa");
+
+		const colorPreview = document.createElement("span");
+		colorPreview.className = "stage-color-preview";
+
+		const colorCaret = document.createElement("span");
+		colorCaret.className = "stage-color-caret";
+
+		colorTrigger.appendChild(colorPreview);
+		colorTrigger.appendChild(colorCaret);
+
+		const colorMenu = document.createElement("div");
+		colorMenu.className = "stage-color-menu";
+
+		const setSelectedColor = (value) => {
+			colorInput.value = value;
+			const match = stageColors.find((item) => item.color === value);
+			const textColor = match ? match.text : "#ffffff";
+			colorPreview.style.setProperty("--stage-color", value);
+			colorPreview.style.color = textColor;
+			colorPreview.textContent = "Título";
+			const options = colorMenu.querySelectorAll(".stage-color-option");
+			options.forEach((option) => {
+				option.classList.toggle("is-selected", option.dataset.color === value);
+			});
+		};
+
+		stageColors.forEach((item) => {
+			const color = item.color;
+			const textColor = item.text;
+			const option = document.createElement("button");
+			option.type = "button";
+			option.className = "stage-color-option";
+			option.style.setProperty("--stage-color", color);
+			option.style.color = textColor;
+			option.dataset.color = color;
+			option.setAttribute("aria-label", "Color " + color);
+			option.textContent = "Título";
+			option.addEventListener("click", (event) => {
+				event.stopPropagation();
+				setSelectedColor(color);
+				colorMenu.classList.remove("show");
+			});
+			colorMenu.appendChild(option);
+		});
+
+		colorTrigger.addEventListener("click", (event) => {
+			event.stopPropagation();
+			const isOpen = colorMenu.classList.contains("show");
+			closeAllColorMenus();
+			if (!isOpen) {
+				colorMenu.classList.add("show");
+			}
+		});
+
+		setSelectedColor(defaultStageColor);
+		ensureColorMenuListener();
+
+		nameCol.appendChild(label);
+		nameCol.appendChild(input);
+		colorSelect.appendChild(colorTrigger);
+		colorSelect.appendChild(colorMenu);
+		colorCol.appendChild(colorLabel);
+		colorCol.appendChild(colorSelect);
+		colorCol.appendChild(colorInput);
+		row.appendChild(nameCol);
+		row.appendChild(colorCol);
+		body.appendChild(row);
 
 		card.appendChild(header);
 		card.appendChild(body);
@@ -168,6 +305,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	if (funnelName) {
 		funnelName.addEventListener("input", () => {
+			if (funnelName.value.length > 40) {
+				funnelName.value = funnelName.value.slice(0, 40);
+			}
 			updateSubmitState();
 			setSubmitError("");
 		});
@@ -182,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const description = document.getElementById("funnel-descripcion");
 		const activeField = document.getElementById("funnel-activo");
 		const stageCards = container ? Array.from(container.querySelectorAll(".stage-card")) : [];
-		const stageInputs = stageCards.map((card) => card.querySelector("input"));
+		const stageInputs = stageCards.map((card) => card.querySelector("input[name=\"etapa_nombre[]\"]"));
 		const stageValues = stageInputs.map((input) => (input ? input.value.trim() : ""));
 
 		if (!token) {
@@ -202,10 +342,18 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
-		const etapas = stageValues.map((value, index) => ({
-			Etapa: value,
-			Orden: index + 1
-		}));
+		const etapas = stageCards.map((card, index) => {
+			const nameInput = card.querySelector("input[name=\"etapa_nombre[]\"]");
+			const colorInput = card.querySelector("input[name=\"etapa_color[]\"]");
+			const selectedColor = colorInput ? colorInput.value : defaultStageColor;
+			const match = stageColors.find((item) => item.color === selectedColor);
+			return {
+				Etapa: nameInput ? nameInput.value.trim() : "",
+				Orden: index + 1,
+				ColorFondo: selectedColor,
+				ColorTexto: match ? match.text : "#ffffff"
+			};
+		});
 
 		const payload = {
 			token,
@@ -230,6 +378,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			const data = await response.json();
 			if (data && data.success === true) {
 				const baseUrl = window.appBaseUrl || "";
+				if (window.sessionStorage) {
+					window.sessionStorage.setItem("funnel_created", "1");
+				}
 				window.location.href = baseUrl + "/pages/funnels/administrar-funnels.php";
 				return;
 			}

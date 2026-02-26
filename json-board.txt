@@ -1,0 +1,28 @@
+FUNNEL -> GESTIONAR LEAD
+   - Mostar información de la Lead + Seguimiento
+   - Boton: Cmabiar de Etapa
+   - Boton: Ganada
+   - Boton: Perdida
+   - Cambiar de Etapa
+   - Boton: Quitar del Funnel
+   * Todo estos botones pueden ir en un bloque blanco arriba del tab
+
+
+
+FUNNEL TERMINAR
+ - AGREGAR NUEVA LEAD A FUNNEL
+ - AGREGAR NUEVA LEAD A FUNNEL MASIVO
+ 
+
+COSAS FALTANTES
+ - EN DETALLE LEAD: BOTONES DE EVA. RAPDAI Y EVA PROFESIONAL
+
+  IMPORTANTE:
+   - CARD: especificar si todo el card es para dar click y solo un pedazo para mover
+   - CARD: especificar si poner un boton para abrir el modal
+   -  MODAL PARA HACER SEGUIMIENTO A LAS LEADS DE CADA ETAPA
+       - Actualizar Historial 
+       - Actualizar Estrellas
+       - Actualizar etapa
+
+   - CREAR EVENTOS DE USUARIO PARA SABER QUE HACEN

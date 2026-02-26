@@ -1,0 +1,178 @@
+[
+  {
+    "Funnel": {
+      "IdFunnel": 19,
+      "Nombre": "Funnel testing",
+      "Descripcion": "Testing de etapas de system",
+      "TotalLeads": 9
+    },
+    "Etapas": [
+      {
+        "IdEtapa": 64,
+        "Nombre": "Llegadod",
+        "Orden": 1,
+        "ColorFondo": "#7BC043",
+        "ColorTexto": "#1B3A1B",
+        "TipoEtapa": "user",
+        "TotalLeads": 2
+      },
+      {
+        "IdEtapa": 65,
+        "Nombre": "Primer Contacto",
+        "Orden": 2,
+        "ColorFondo": "#F0B429",
+        "ColorTexto": "#3A2A00",
+        "TipoEtapa": "user",
+        "TotalLeads": 1
+      },
+      {
+        "IdEtapa": 66,
+        "Nombre": "Reunión",
+        "Orden": 3,
+        "ColorFondo": "#6F42C1",
+        "ColorTexto": "#FFFFFF",
+        "TipoEtapa": "user",
+        "TotalLeads": 1
+      }
+    ],
+    "EtapasFijas": [
+      {
+        "IdEtapa": 67,
+        "Nombre": "Ganados",
+        "Orden": 1,
+        "ColorFondo": "#00c853",
+        "ColorTexto": "#FFFFFF",
+        "TipoEtapa": "system",
+        "TotalLeads": 3
+      },
+      {
+        "IdEtapa": 68,
+        "Nombre": "Perdidos",
+        "Orden": 2,
+        "ColorFondo": "#e04b4b",
+        "ColorTexto": "#FFFFFF",
+        "TipoEtapa": "system",
+        "TotalLeads": 2
+      }
+    ],
+    "Leads": [
+      {
+        "IdEtapa": 64,
+        "IdLeadFunnel": 5,
+        "Nombre": "José Ronald Lopez Bahamonde",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Bajo Potencial",
+        "Pais": "Perú",
+        "Broker": "eToro",
+        "Objetivo": "Mejorar mis comisiones",
+        "Estrellas": 3,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/pe.png"
+      },
+      {
+        "IdEtapa": 65,
+        "IdLeadFunnel": 7,
+        "Nombre": "Fredy Lopez",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Bajo Potencial",
+        "Pais": "Venezuela",
+        "Broker": "Axi (antes AxiTrader)",
+        "Objetivo": "Mejorar mis comisiones",
+        "Estrellas": 0,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/ve.png"
+      },
+      {
+        "IdEtapa": 66,
+        "IdLeadFunnel": 8,
+        "Nombre": "Adrian Lopez",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Buen Prospecto",
+        "Pais": "España",
+        "Broker": "Eightcap",
+        "Objetivo": "Cambiar de bróker",
+        "Estrellas": 0,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/es.png"
+      },
+      {
+        "IdEtapa": 67,
+        "IdLeadFunnel": 10,
+        "Nombre": "Luis Enrique Lopez",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Alta Promesa",
+        "Pais": "Colombia",
+        "Broker": "AvaTrade",
+        "Objetivo": "Buscar socios / Inversión",
+        "Estrellas": 0,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/co.png"
+      },
+      {
+        "IdEtapa": 67,
+        "IdLeadFunnel": 11,
+        "Nombre": "Gladys Bahamonde",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Alta Promesa",
+        "Pais": "Argentina",
+        "Broker": "Admiral Markets",
+        "Objetivo": "Buscar socios / Inversión",
+        "Estrellas": 0,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/ar.png"
+      },
+      {
+        "IdEtapa": 67,
+        "IdLeadFunnel": 12,
+        "Nombre": "Estefania Elorriaga",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Buen Prospecto",
+        "Pais": "México",
+        "Broker": "CMC Markets",
+        "Objetivo": "Buscar socios / Inversión",
+        "Estrellas": 0,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/mx.png"
+      },
+      {
+        "IdEtapa": 68,
+        "IdLeadFunnel": 9,
+        "Nombre": "Beberly Dayana Lopez Bahamonde",
+        "Estado": "Recien llegado",
+        "Clasificacion": "En Desarrollo",
+        "Pais": "Chile",
+        "Broker": "Charles Schwab",
+        "Objetivo": "Mejorar mis comisiones",
+        "Estrellas": 0,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/cl.png"
+      },
+      {
+        "IdEtapa": 68,
+        "IdLeadFunnel": 13,
+        "Nombre": "Daniel Ruiz ",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Alta Promesa",
+        "Pais": "Perú",
+        "Broker": "City Index",
+        "Objetivo": "Mejorar mis comisiones",
+        "Estrellas": 0,
+        "Orden": 1,
+        "Bandera": "https://flagcdn.com/w20/pe.png"
+      },
+      {
+        "IdEtapa": 64,
+        "IdLeadFunnel": 6,
+        "Nombre": "Elery Lopez",
+        "Estado": "Recien llegado",
+        "Clasificacion": "Alta Promesa",
+        "Pais": "Puerto Rico",
+        "Broker": "DuoMarkets",
+        "Objetivo": "Mejorar mis comisiones",
+        "Estrellas": 0,
+        "Orden": 3,
+        "Bandera": "https://flagcdn.com/w20/pr.png"
+      }
+    ]
+  }
+]

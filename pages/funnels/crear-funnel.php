@@ -73,6 +73,76 @@
 			justify-content: center;
 			border-radius: 10px;
 		}
+		.stage-color-select {
+			position: relative;
+		}
+		.stage-color-trigger {
+			width: 100%;
+			border: 1px solid #e1e5ea;
+			background: #ffffff;
+			border-radius: 8px;
+			padding: 6px 8px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 8px;
+			cursor: pointer;
+		}
+		.stage-color-preview {
+			width: 100%;
+			height: 26px;
+			border-radius: 6px;
+			border: 1px solid #e1e5ea;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 11px;
+			font-weight: 600;
+			background: var(--stage-color, #3B7DDD);
+		}
+		.stage-color-caret {
+			width: 0;
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 6px solid #6c757d;
+		}
+		.stage-color-menu {
+			position: absolute;
+			top: calc(100% + 6px);
+			left: 0;
+			right: 0;
+			background: #ffffff;
+			border: 1px solid #e1e5ea;
+			border-radius: 10px;
+			padding: 0.5rem;
+			display: none;
+			z-index: 10;
+			box-shadow: 0 12px 30px rgba(16, 24, 40, 0.12);
+		}
+		.stage-color-menu.show {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.35rem;
+		}
+		.stage-color-option {
+			width: 100%;
+			height: 28px;
+			border-radius: 6px;
+			border: 1px solid #e1e5ea;
+			background: var(--stage-color, #3B7DDD);
+			padding: 0;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 11px;
+			font-weight: 600;
+		}
+		.stage-color-option.is-selected {
+			outline: 2px solid #111;
+			outline-offset: 1px;
+		}
 	</style>
 </head>
 
@@ -85,7 +155,12 @@
 
 			<main class="content">
 				<div class="container-fluid p-0">
-					<h1 class="h3 mb-3">Crear Funnel</h1>
+					<div class="d-flex align-items-center justify-content-between mb-3">
+						<h1 class="h3 mb-0">Crear Funnel</h1>
+						<a class="btn btn-outline-primary" href="<?php echo $baseUrl; ?>/pages/funnels/administrar-funnels.php">
+							<i class="align-middle me-1" data-feather="arrow-left"></i>Volver a Administrar
+						</a>
+					</div>
 					<div class="row">
 						<div class="col-12 col-lg-5">
 							<div class="card">
@@ -96,7 +171,7 @@
 									<form>
 										<div class="mb-3">
 											<label class="form-label" for="funnel-nombre">Nombre</label>
-											<input type="text" class="form-control" id="funnel-nombre" placeholder="Nombre del funnel">
+									<input type="text" class="form-control" id="funnel-nombre" placeholder="Nombre del funnel" maxlength="40">
 										</div>
 										<div class="mb-3">
 											<label class="form-label" for="funnel-descripcion">Descripción</label>
@@ -112,20 +187,25 @@
 									</form>
 								</div>
 							</div>
-							<div class="card border-0 shadow-sm mt-3 funnel-tip">
-								<div class="card-body">
-									<div class="d-flex align-items-start gap-2">
-										<span class="funnel-tip-icon"><i data-feather="zap"></i></span>
-										<div>
-											<div class="fw-semibold mb-1">Tip importante</div>
-											<div class="text-muted">Para organizar tu funnel necesitas crear etapas claras. Todos los funnels ya incluyen dos etapas preasignadas: <strong>Ganados</strong> y <strong>Perdidos</strong>. Solo define las etapas intermedias que usarás en tu proceso.</div>
-										</div>
+						<div class="card border-0 shadow-sm mt-3 funnel-tip">
+							<div class="card-body">
+								<div class="d-flex align-items-start gap-2">
+									<span class="funnel-tip-icon"><i data-feather="zap"></i></span>
+									<div>
+										<div class="fw-semibold mb-1">Tip importante</div>
+										<div class="text-muted">Para organizar tu funnel necesitas crear etapas claras. Todos los funnels ya incluyen dos etapas preasignadas: <strong>Ganados</strong> y <strong>Perdidos</strong>. Solo define las etapas intermedias que usarás en tu proceso.</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-lg-7">
-							<div class="card">
+						<div class="d-flex justify-content-end mt-3">
+							<button type="button" class="btn btn-primary btn-lg" id="funnel-submit" disabled>Crear Nuevo Funnel</button>
+						</div>
+						<div class="text-muted small mt-2 text-end" id="funnel-submit-helper">Completa el nombre del funnel y agrega al menos 2 etapas con nombre.</div>
+						<div class="text-danger small mt-1 text-end d-none" id="funnel-submit-error"></div>
+					</div>
+					<div class="col-12 col-lg-7">
+						<div class="card">
 								<div class="card-header d-flex justify-content-between align-items-center">
 									<h5 class="card-title mb-0">Etapas</h5>
 									<button type="button" class="btn btn-sm" style="background:#00c853;color:#ffffff;" id="stage-add">
@@ -138,15 +218,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12">
-							<div class="d-flex justify-content-end">
-								<button type="button" class="btn btn-primary btn-lg" id="funnel-submit" disabled>Crear Nuevo Funnel</button>
-							</div>
-							<div class="text-muted small mt-2 text-end" id="funnel-submit-helper">Completa el nombre del funnel y agrega al menos 2 etapas con nombre.</div>
-							<div class="text-danger small mt-1 text-end d-none" id="funnel-submit-error"></div>
-						</div>
-					</div>
 				</div>
+			</div>
 			</main>
 
 			<?php include '../../includes/footer.php'; ?>
